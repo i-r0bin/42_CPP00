@@ -6,7 +6,7 @@
 /*   By: rilliano <rilliano@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:57:45 by rilliano          #+#    #+#             */
-/*   Updated: 2024/12/03 15:48:28 by rilliano         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:07:47 by rilliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,21 @@ int main(void) {
     Phonebook pb;
     std::string str;
 
-    while (str != "EXIT" && std::cin.good()) {
+    while (str != "EXIT") {
         std::cout << "Enter a command: ";
         std::getline(std::cin, str);
+        if (!std::cin.good())
+        {
+            std::cout << "EXIT" << std::endl;
+            break;
+        }
         if (str == "ADD") {
             pb.add_contact();
             std::cout << std::endl;
         } else if (str == "SEARCH") {
             pb.search_contact();
             std::cout << std::endl;
-        } else if (str != "") {
+        } else if (str != "" && str != "EXIT") {
             std::cout << std::endl << "Invalid command! Available commands:\nADD\nSEARCH\nEXIT" << std::endl;
             std::cout << std::endl;
         }
