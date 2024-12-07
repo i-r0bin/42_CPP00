@@ -6,7 +6,7 @@
 /*   By: rilliano <rilliano@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:57:58 by rilliano          #+#    #+#             */
-/*   Updated: 2024/12/03 14:57:59 by rilliano         ###   ########.fr       */
+/*   Updated: 2024/12/07 23:37:33 by rilliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <iostream>
 # include <string>
+#include <sstream>
+#include <iomanip>
 # include "Contact.hpp"
 
 class Phonebook {
@@ -26,6 +28,8 @@ class Phonebook {
         Phonebook(void);
         ~Phonebook(void);
 
+        Contact get_contact_by_id(int id);
+        
         void    add_contact(void);
         void    search_contact(void);
         void    display_contact(int id);

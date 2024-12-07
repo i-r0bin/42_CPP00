@@ -6,7 +6,7 @@
 /*   By: rilliano <rilliano@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:57:53 by rilliano          #+#    #+#             */
-/*   Updated: 2024/12/03 14:57:54 by rilliano         ###   ########.fr       */
+/*   Updated: 2024/12/08 00:24:12 by rilliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Phonebook::Phonebook(void) {
 }
 
 Phonebook::~Phonebook(void) {
+    std::cout << "Destroying phonebook. Goodbye!" << std::endl;
     return ;
 }
 
@@ -27,13 +28,16 @@ void    Phonebook::add_contact(void) {
     std::string str;
 
     if (this->_nb_contacts > 7) {
-        std::cout << "Overwriting contact: " << this->_contacts[this->_nb_contacts % 8].get_fname() << std::endl;
+        std::cout << "Overwriting contact: " 
+                  << this->_contacts[this->_nb_contacts % 8].get_fname() 
+                  << " - ID: " 
+                  << this->_nb_contacts % 8 
+                  << std::endl;
     }
 
     str = "";
     while (!std::cin.eof() && str == "") {
         std::cout << "Enter first name: ";
-        std::cin.ignore();
         if (std::getline(std::cin, str) && str != "") {
             this->_contacts[this->_nb_contacts % 8].set_fname(str);
         }
@@ -76,7 +80,8 @@ void    Phonebook::add_contact(void) {
         }
     }
 
-    this->_nb_contacts++;
+    if (!std::cin.eof())
+        this->_nb_contacts++;
 }
 
 void    Phonebook::search_contact(void) {
@@ -88,7 +93,7 @@ void    Phonebook::search_contact(void) {
         return ;
     }
 
-    while (str == "") {
+    while (!std::cin.eof() && str == "") {
         std::cout << "Enter an id: ";
         std::getline(std::cin, str);
         if (str == "") {
@@ -106,13 +111,41 @@ void    Phonebook::search_contact(void) {
         }
     }
 
-    this->display_contact(id);
+    if (!std::cin.eof())
+        this->display_contact(id);
+}
+
+Contact Phonebook::get_contact_by_id(int id) {
+    if (id >= 0 && id < this->_nb_contacts) {
+        return _contacts[id];
+    } else {
+        std::cerr << "Invalid contact ID" << std::endl;
+        return Contact();
+    }
+}
+
+std::string format_field(const std::string& field) {
+    if (field.length() > 10) {
+        return field.substr(0, 9) + ".";
+    } else {
+        return std::string(10 - field.length(), ' ') + field;
+    }
 }
 
 void    Phonebook::display_contact(int id) {
-    std::cout << "First name: " << this->_contacts[id].get_fname() << std::endl;
-    std::cout << "Last name: " << this->_contacts[id].get_lname() << std::endl;
-    std::cout << "Nickname: " << this->_contacts[id].get_nickname() << std::endl;
-    std::cout << "Phone number: " << this->_contacts[id].get_phone_num() << std::endl;
-    std::cout << "Darkest secret: " << this->_contacts[id].get_secret() << std::endl;
+    Contact contact = get_contact_by_id(id);
+
+    std::cout << std::setw(10) << "Index" << "|"
+              << std::setw(10) << "First Name" << "|"
+              << std::setw(10) << "Last Name" << "|"
+              << std::setw(10) << "Nickname" << std::endl;
+
+    std::stringstream ss;
+    ss << id;
+    std::string index = format_field(ss.str());
+    std::string first_name = format_field(contact.get_fname());
+    std::string last_name = format_field(contact.get_lname());
+    std::string nickname = format_field(contact.get_nickname());
+
+    std::cout << index << "|" << first_name << "|" << last_name << "|" << nickname << std::endl;
 }
