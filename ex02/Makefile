@@ -1,19 +1,15 @@
-SRC = \
-	Account.cpp \
-	tests.cpp
-
-OBJ = $(SRC:%.cpp=%.o)
-
-NAME = account
-
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -f
+
+SRC = Account.cpp tests.cpp
+OBJ = $(SRC:%.cpp=%.o)
+NAME = account
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 clean:
 	$(RM) $(OBJ)

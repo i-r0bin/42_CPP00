@@ -6,7 +6,7 @@
 /*   By: rilliano <rilliano@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:57:53 by rilliano          #+#    #+#             */
-/*   Updated: 2024/12/08 00:24:12 by rilliano         ###   ########.fr       */
+/*   Updated: 2024/12/08 22:15:34 by rilliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ void    Phonebook::add_contact(void) {
         this->_nb_contacts++;
 }
 
+int string_to_int(const std::string& str) {
+    std::stringstream ss(str);
+    int result;
+    ss >> result;
+    return result;
+}
+
 void    Phonebook::search_contact(void) {
     int id;
     std::string str;
@@ -104,7 +111,7 @@ void    Phonebook::search_contact(void) {
             str = "";
             continue ;
         }
-        id = std::stoi(str);
+        id = string_to_int(str);
         if (id >= this->_nb_contacts) {
             std::cout << "Contact not found. Please enter a valid id." << std::endl << std::endl;
             str = "";

@@ -1,20 +1,18 @@
-SRC = \
-	main.cpp \
-	Phonebook.cpp \
-	Contact.cpp
-
-OBJ = $(SRC:%.cpp=%.o)
-
-NAME = phonebook
-
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -f
+
+SRC = main.cpp Phonebook.cpp Contact.cpp
+OBJ = $(SRC:.cpp=.o)
+NAME = phonebook
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
