@@ -6,15 +6,15 @@
 /*   By: rilliano <rilliano@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:57:41 by rilliano          #+#    #+#             */
-/*   Updated: 2024/12/03 14:57:42 by rilliano         ###   ########.fr       */
+/*   Updated: 2024/12/08 23:30:24 by rilliano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
-# define CONTACT_HPP
+#define CONTACT_HPP
 
-# include <iostream>
-# include <string>
+#include <iostream>
+#include <string>
 
 class Contact {
     private:
